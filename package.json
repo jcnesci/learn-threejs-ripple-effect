@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "@parcel/transformer-glsl": "^2.0.1",
+    "dat.gui": "^0.7.7",
     "parcel": "^2.0.1"
   },
   "dependencies": {
