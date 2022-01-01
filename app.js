@@ -103,7 +103,7 @@ export default class Sketch {
 
   addObjects() {
     // this.geometry = new THREE.PlaneBufferGeometry(1, 1);
-    this.geometry = new THREE.PlaneGeometry(40, 40, 1, 1);
+    this.geometry = new THREE.PlaneGeometry(64, 64, 1, 1);
     // this.material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
     // this.material = new THREE.ShaderMaterial({
     //   vertexShader: vertex,
@@ -114,7 +114,7 @@ export default class Sketch {
     //   side: THREE.DoubleSide,
     // });
 
-    this.max = 50;
+    this.max = 100;
     this.meshes = [];
     for (let i = 0; i < this.max; i++) {
       let m = new THREE.MeshBasicMaterial({
@@ -163,8 +163,8 @@ export default class Sketch {
     mesh.visible = true;
     mesh.position.x = x;
     mesh.position.y = y;
-    mesh.scale.x = mesh.scale.y = 1;
-    mesh.material.opacity = 1;
+    mesh.scale.x = mesh.scale.y = 0.2;
+    mesh.material.opacity = 0.5;
   }
 
   trackMousePos() {
@@ -186,6 +186,7 @@ export default class Sketch {
     this.time++;
     // this.renderer.render(this.scene, this.camera);
 
+    // How to merge 2 scenes
     this.renderer.setRenderTarget(this.baseTexture);
     this.renderer.render(this.scene, this.camera);
     this.material.uniforms.uDisplacement.value = this.baseTexture.texture;
@@ -198,8 +199,8 @@ export default class Sketch {
       if (mesh.visible) {
         mesh.rotation.z += 0.02;
         mesh.material.opacity *= 0.96;
-        mesh.scale.x = mesh.scale.y = 0.98 * mesh.scale.x + 0.1;
-        if (mesh.material.opacity < 0.02) mesh.visible = false;
+        mesh.scale.x = mesh.scale.y = 0.982 * mesh.scale.x + 0.108;
+        if (mesh.material.opacity < 0.002) mesh.visible = false;
       }
     });
   }
