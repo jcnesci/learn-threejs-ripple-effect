@@ -46,13 +46,12 @@ export default class Sketch {
     );
     this.camera.position.set(0, 0, 2);
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.time = 0;
+    // this.time = 0;
     this.mouse = new THREE.Vector2(0, 0);
     this.prevMouse = new THREE.Vector2(0, 0);
     this.currentWave = 0;
 
-    // this.isPlaying = true; // Not used yet
-
+    // FBO
     this.baseTexture = new THREE.WebGLRenderTarget(this.width, this.height, {
       minFilter: THREE.LinearFilter,
       magFilter: THREE.LinearFilter,
@@ -82,37 +81,11 @@ export default class Sketch {
     this.height = this.container.offsetHeight;
     this.renderer.setSize(this.width, this.height);
     this.camera.aspect = this.width / this.height;
-
-    // image cover (?)
-    // this.imageAspect = 853 / 1280;
-    // let a1, a2;
-    // if (this.height / this.width > this.imageAspect) {
-    //   a1 = (this.width / this.height) * this.imageAspect;
-    //   a2 = 1;
-    // } else {
-    //   a1 = 1;
-    //   a2 = this.height / this.width / this.imageAspect;
-    // }
-    // this.material.uniforms.resolution.value.x = this.width;
-    // this.material.uniforms.resolution.value.y = this.height;
-    // this.material.uniforms.resolution.value.z = a1;
-    // this.material.uniforms.resolution.value.w = a2;
-
     this.camera.updateProjectionMatrix();
   }
 
   addObjects() {
-    // this.geometry = new THREE.PlaneBufferGeometry(1, 1);
     this.geometry = new THREE.PlaneGeometry(64, 64, 1, 1);
-    // this.material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
-    // this.material = new THREE.ShaderMaterial({
-    //   vertexShader: vertex,
-    //   fragmentShader: fragment,
-    //   uniforms: {
-    //     progress: { type: "f", value: 0 },
-    //   },
-    //   side: THREE.DoubleSide,
-    // });
 
     this.max = 100;
     this.meshes = [];
@@ -140,11 +113,11 @@ export default class Sketch {
       vertexShader: vertex,
       fragmentShader: fragment,
       uniforms: {
-        time: { value: 0 },
+        // time: { value: 0 },
         uDisplacement: { value: null },
         uTexture: { value: new THREE.TextureLoader().load(image.pathname) },
         // progress: { type: "f", value: 0 },
-        resolution: { value: new THREE.Vector4() },
+        // resolution: { value: new THREE.Vector4() },
       },
       side: THREE.DoubleSide,
     });
@@ -183,8 +156,7 @@ export default class Sketch {
 
   render() {
     this.trackMousePos();
-    this.time++;
-    // this.renderer.render(this.scene, this.camera);
+    // this.time++;
 
     // How to merge 2 scenes
     this.renderer.setRenderTarget(this.baseTexture);
